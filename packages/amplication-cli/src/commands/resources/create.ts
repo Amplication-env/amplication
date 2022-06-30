@@ -49,7 +49,7 @@ export default class ResourcesCreate extends ConfiguredCommand {
       this.client,
       name,
       description || '',
-      EnumResourceType.Service //TODO change to get input from the user
+      EnumResourceType.Service //TODO change to get input from the user TBD how to implement
     );
 
     if (flags['set-current'] === true) {
