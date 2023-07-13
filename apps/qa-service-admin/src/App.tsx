@@ -9,14 +9,6 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { ClassModelList } from "./classModel/ClassModelList";
-import { ClassModelCreate } from "./classModel/ClassModelCreate";
-import { ClassModelEdit } from "./classModel/ClassModelEdit";
-import { ClassModelShow } from "./classModel/ClassModelShow";
-import { AdminList } from "./admin/AdminList";
-import { AdminCreate } from "./admin/AdminCreate";
-import { AdminEdit } from "./admin/AdminEdit";
-import { AdminShow } from "./admin/AdminShow";
 import { OrderList } from "./order/OrderList";
 import { OrderCreate } from "./order/OrderCreate";
 import { OrderEdit } from "./order/OrderEdit";
@@ -65,20 +57,6 @@ const App = (): React.ReactElement => {
           edit={UserEdit}
           create={UserCreate}
           show={UserShow}
-        />
-        <Resource
-          name="ClassModel"
-          list={ClassModelList}
-          edit={ClassModelEdit}
-          create={ClassModelCreate}
-          show={ClassModelShow}
-        />
-        <Resource
-          name="Admin"
-          list={AdminList}
-          edit={AdminEdit}
-          create={AdminCreate}
-          show={AdminShow}
         />
         <Resource
           name="Order"
