@@ -18,20 +18,7 @@ model User {
   roles     Json
 }
 
-model Order {
-  id         String           @id @default(cuid())
-  createdAt  DateTime         @default(now())
-  updatedAt  DateTime         @updatedAt
-  quantity   Int?
-  discount   Float?
-  totalPrice Int?
-  product    Product?         @relation(fields: [productId], references: [id])
-  productId  String?
-  status     EnumOrderStatus? @default(PENDING)
-}
-
 model Product {
-  orders      Order[]
   id          String   @id @default(cuid())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -44,10 +31,4 @@ model SomeThing {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
   updatedAt DateTime @updatedAt
-}
-
-enum EnumOrderStatus {
-  PENDING
-  COMPLETED
-  CANCELLED
 }

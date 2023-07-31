@@ -1,7 +1,4 @@
-import { Order } from "../order/Order";
-
 export type Product = {
-  orders?: Array<Order>;
   id: string;
   createdAt: Date;
   updatedAt: Date;

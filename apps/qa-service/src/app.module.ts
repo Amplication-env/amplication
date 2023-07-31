@@ -2,7 +2,6 @@ import { Module, Scope } from "@nestjs/common";
 import { APP_INTERCEPTOR } from "@nestjs/core";
 import { MorganInterceptor, MorganModule } from "nest-morgan";
 import { UserModule } from "./user/user.module";
-import { OrderModule } from "./order/order.module";
 import { ProductModule } from "./product/product.module";
 import { SomeThingModule } from "./someThing/someThing.module";
 import { HealthModule } from "./health/health.module";
@@ -22,7 +21,6 @@ import { AuthModule } from "./auth/auth.module";
     ACLModule,
     AuthModule,
     UserModule,
-    OrderModule,
     ProductModule,
     SomeThingModule,
     HealthModule,
