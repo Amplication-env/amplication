@@ -48,24 +48,9 @@ export class SomeThingControllerBase {
   })
   async create(@common.Body() data: SomeThingCreateInput): Promise<SomeThing> {
     return await this.service.create({
-      data: {
-        ...data,
-
-        customer: data.customer
-          ? {
-              connect: data.customer,
-            }
-          : undefined,
-      },
+      data: data,
       select: {
         createdAt: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         updatedAt: true,
       },
@@ -90,13 +75,6 @@ export class SomeThingControllerBase {
       ...args,
       select: {
         createdAt: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         updatedAt: true,
       },
@@ -122,13 +100,6 @@ export class SomeThingControllerBase {
       where: params,
       select: {
         createdAt: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
         id: true,
         updatedAt: true,
       },
@@ -160,24 +131,9 @@ export class SomeThingControllerBase {
     try {
       return await this.service.update({
         where: params,
-        data: {
-          ...data,
-
-          customer: data.customer
-            ? {
-                connect: data.customer,
-              }
-            : undefined,
-        },
+        data: data,
         select: {
           createdAt: true,
-
-          customer: {
-            select: {
-              id: true,
-            },
-          },
-
           id: true,
           updatedAt: true,
         },
@@ -211,13 +167,6 @@ export class SomeThingControllerBase {
         where: params,
         select: {
           createdAt: true,
-
-          customer: {
-            select: {
-              id: true,
-            },
-          },
-
           id: true,
           updatedAt: true,
         },

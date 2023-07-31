@@ -1,24 +1,11 @@
 import * as React from "react";
-import {
-  Create,
-  SimpleForm,
-  CreateProps,
-  ReferenceInput,
-  SelectInput,
-} from "react-admin";
-import { CustomerTitle } from "../customer/CustomerTitle";
+import { Create, SimpleForm, CreateProps } from "react-admin";
 
 export const SomeThingCreate = (props: CreateProps): React.ReactElement => {
   return (
     <Create {...props}>
       <SimpleForm>
-        <ReferenceInput
-          source="customer.id"
-          reference="Customer"
-          label="Customer"
-        >
-          <SelectInput optionText={CustomerTitle} />
-        </ReferenceInput>
+        <div />
       </SimpleForm>
     </Create>
   );

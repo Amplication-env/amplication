@@ -51,12 +51,6 @@ export class OrderControllerBase {
       data: {
         ...data,
 
-        customer: data.customer
-          ? {
-              connect: data.customer,
-            }
-          : undefined,
-
         product: data.product
           ? {
               connect: data.product,
@@ -70,12 +64,6 @@ export class OrderControllerBase {
         quantity: true,
         discount: true,
         totalPrice: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
 
         product: {
           select: {
@@ -112,12 +100,6 @@ export class OrderControllerBase {
         discount: true,
         totalPrice: true,
 
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
         product: {
           select: {
             id: true,
@@ -153,12 +135,6 @@ export class OrderControllerBase {
         quantity: true,
         discount: true,
         totalPrice: true,
-
-        customer: {
-          select: {
-            id: true,
-          },
-        },
 
         product: {
           select: {
@@ -199,12 +175,6 @@ export class OrderControllerBase {
         data: {
           ...data,
 
-          customer: data.customer
-            ? {
-                connect: data.customer,
-              }
-            : undefined,
-
           product: data.product
             ? {
                 connect: data.product,
@@ -218,12 +188,6 @@ export class OrderControllerBase {
           quantity: true,
           discount: true,
           totalPrice: true,
-
-          customer: {
-            select: {
-              id: true,
-            },
-          },
 
           product: {
             select: {
@@ -268,12 +232,6 @@ export class OrderControllerBase {
           quantity: true,
           discount: true,
           totalPrice: true,
-
-          customer: {
-            select: {
-              id: true,
-            },
-          },
 
           product: {
             select: {

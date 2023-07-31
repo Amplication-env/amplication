@@ -222,12 +222,6 @@ export class ProductControllerBase {
         discount: true,
         totalPrice: true,
 
-        customer: {
-          select: {
-            id: true,
-          },
-        },
-
         product: {
           select: {
             id: true,

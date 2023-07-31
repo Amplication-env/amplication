@@ -1,4 +1,3 @@
-import { Customer } from "../customer/Customer";
 import { Product } from "../product/Product";
 
 export type Order = {
@@ -8,7 +7,6 @@ export type Order = {
   quantity: number | null;
   discount: number | null;
   totalPrice: number | null;
-  customer?: Customer | null;
   product?: Product | null;
   status?: "PENDING" | "COMPLETED" | "CANCELLED" | null;
 };

@@ -21,7 +21,6 @@ import {
   IsEnum,
 } from "class-validator";
 import { Type } from "class-transformer";
-import { Customer } from "../../customer/base/Customer";
 import { Product } from "../../product/base/Product";
 import { EnumOrderStatus } from "./EnumOrderStatus";
 
@@ -83,15 +82,6 @@ class Order {
     nullable: true,
   })
   totalPrice!: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => Customer,
-  })
-  @ValidateNested()
-  @Type(() => Customer)
-  @IsOptional()
-  customer?: Customer | null;
 
   @ApiProperty({
     required: false,

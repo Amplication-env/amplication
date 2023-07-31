@@ -18,9 +18,8 @@ import {
   ValidateNested,
   IsEnum,
 } from "class-validator";
-import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
-import { Type } from "class-transformer";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+import { Type } from "class-transformer";
 import { EnumOrderStatus } from "./EnumOrderStatus";
 
 @InputType()
@@ -57,18 +56,6 @@ class OrderCreateInput {
     nullable: true,
   })
   totalPrice?: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: () => CustomerWhereUniqueInput,
-  })
-  @ValidateNested()
-  @Type(() => CustomerWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CustomerWhereUniqueInput, {
-    nullable: true,
-  })
-  customer?: CustomerWhereUniqueInput | null;
 
   @ApiProperty({
     required: false,
