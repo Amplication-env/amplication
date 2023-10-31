@@ -1,4 +1,4 @@
-datasource postgres {
+datasource db {
   provider = "postgresql"
   url      = env("DB_URL")
 }
@@ -30,5 +30,11 @@ model Product {
 model SomeThing {
   createdAt DateTime @default(now())
   id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Test {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
