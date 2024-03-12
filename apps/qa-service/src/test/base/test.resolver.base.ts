@@ -18,11 +18,11 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { DeleteTestArgs } from "./DeleteTestArgs";
+import { Test } from "./Test";
 import { TestCountArgs } from "./TestCountArgs";
 import { TestFindManyArgs } from "./TestFindManyArgs";
 import { TestFindUniqueArgs } from "./TestFindUniqueArgs";
-import { Test } from "./Test";
+import { DeleteTestArgs } from "./DeleteTestArgs";
 import { TestService } from "../test.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => Test)
@@ -55,7 +55,7 @@ export class TestResolverBase {
     possession: "any",
   })
   async tests(@graphql.Args() args: TestFindManyArgs): Promise<Test[]> {
-    return this.service.findMany(args);
+    return this.service.tests(args);
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
@@ -66,7 +66,7 @@ export class TestResolverBase {
     possession: "own",
   })
   async test(@graphql.Args() args: TestFindUniqueArgs): Promise<Test | null> {
-    const result = await this.service.findOne(args);
+    const result = await this.service.test(args);
     if (result === null) {
       return null;
     }
@@ -81,7 +81,7 @@ export class TestResolverBase {
   })
   async deleteTest(@graphql.Args() args: DeleteTestArgs): Promise<Test | null> {
     try {
-      return await this.service.delete(args);
+      return await this.service.deleteTest(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new GraphQLError(

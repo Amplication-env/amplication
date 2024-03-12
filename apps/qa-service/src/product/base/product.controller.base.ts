@@ -22,11 +22,10 @@ import { ProductService } from "../product.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { ProductCreateInput } from "./ProductCreateInput";
-import { ProductWhereInput } from "./ProductWhereInput";
-import { ProductWhereUniqueInput } from "./ProductWhereUniqueInput";
-import { ProductFindManyArgs } from "./ProductFindManyArgs";
-import { ProductUpdateInput } from "./ProductUpdateInput";
 import { Product } from "./Product";
+import { ProductFindManyArgs } from "./ProductFindManyArgs";
+import { ProductWhereUniqueInput } from "./ProductWhereUniqueInput";
+import { ProductUpdateInput } from "./ProductUpdateInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -46,8 +45,10 @@ export class ProductControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async create(@common.Body() data: ProductCreateInput): Promise<Product> {
-    return await this.service.create({
+  async createProduct(
+    @common.Body() data: ProductCreateInput
+  ): Promise<Product> {
+    return await this.service.createProduct({
       data: data,
       select: {
         id: true,
@@ -72,9 +73,9 @@ export class ProductControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findMany(@common.Req() request: Request): Promise<Product[]> {
+  async products(@common.Req() request: Request): Promise<Product[]> {
     const args = plainToClass(ProductFindManyArgs, request.query);
-    return this.service.findMany({
+    return this.service.products({
       ...args,
       select: {
         id: true,
@@ -99,10 +100,10 @@ export class ProductControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findOne(
+  async product(
     @common.Param() params: ProductWhereUniqueInput
   ): Promise<Product | null> {
-    const result = await this.service.findOne({
+    const result = await this.service.product({
       where: params,
       select: {
         id: true,
@@ -133,12 +134,12 @@ export class ProductControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async update(
+  async updateProduct(
     @common.Param() params: ProductWhereUniqueInput,
     @common.Body() data: ProductUpdateInput
   ): Promise<Product | null> {
     try {
-      return await this.service.update({
+      return await this.service.updateProduct({
         where: params,
         data: data,
         select: {
@@ -171,11 +172,11 @@ export class ProductControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async delete(
+  async deleteProduct(
     @common.Param() params: ProductWhereUniqueInput
   ): Promise<Product | null> {
     try {
-      return await this.service.delete({
+      return await this.service.deleteProduct({
         where: params,
         select: {
           id: true,

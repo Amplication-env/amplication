@@ -22,11 +22,10 @@ import { TestService } from "../test.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { TestCreateInput } from "./TestCreateInput";
-import { TestWhereInput } from "./TestWhereInput";
-import { TestWhereUniqueInput } from "./TestWhereUniqueInput";
-import { TestFindManyArgs } from "./TestFindManyArgs";
-import { TestUpdateInput } from "./TestUpdateInput";
 import { Test } from "./Test";
+import { TestFindManyArgs } from "./TestFindManyArgs";
+import { TestWhereUniqueInput } from "./TestWhereUniqueInput";
+import { TestUpdateInput } from "./TestUpdateInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -46,8 +45,8 @@ export class TestControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async create(@common.Body() data: TestCreateInput): Promise<Test> {
-    return await this.service.create({
+  async createTest(@common.Body() data: TestCreateInput): Promise<Test> {
+    return await this.service.createTest({
       data: data,
       select: {
         id: true,
@@ -69,9 +68,9 @@ export class TestControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findMany(@common.Req() request: Request): Promise<Test[]> {
+  async tests(@common.Req() request: Request): Promise<Test[]> {
     const args = plainToClass(TestFindManyArgs, request.query);
-    return this.service.findMany({
+    return this.service.tests({
       ...args,
       select: {
         id: true,
@@ -93,10 +92,10 @@ export class TestControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findOne(
+  async test(
     @common.Param() params: TestWhereUniqueInput
   ): Promise<Test | null> {
-    const result = await this.service.findOne({
+    const result = await this.service.test({
       where: params,
       select: {
         id: true,
@@ -124,12 +123,12 @@ export class TestControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async update(
+  async updateTest(
     @common.Param() params: TestWhereUniqueInput,
     @common.Body() data: TestUpdateInput
   ): Promise<Test | null> {
     try {
-      return await this.service.update({
+      return await this.service.updateTest({
         where: params,
         data: data,
         select: {
@@ -159,11 +158,11 @@ export class TestControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async delete(
+  async deleteTest(
     @common.Param() params: TestWhereUniqueInput
   ): Promise<Test | null> {
     try {
-      return await this.service.delete({
+      return await this.service.deleteTest({
         where: params,
         select: {
           id: true,

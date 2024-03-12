@@ -18,11 +18,11 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { GqlDefaultAuthGuard } from "../../auth/gqlDefaultAuth.guard";
 import * as common from "@nestjs/common";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { DeleteSomeThingArgs } from "./DeleteSomeThingArgs";
+import { SomeThing } from "./SomeThing";
 import { SomeThingCountArgs } from "./SomeThingCountArgs";
 import { SomeThingFindManyArgs } from "./SomeThingFindManyArgs";
 import { SomeThingFindUniqueArgs } from "./SomeThingFindUniqueArgs";
-import { SomeThing } from "./SomeThing";
+import { DeleteSomeThingArgs } from "./DeleteSomeThingArgs";
 import { SomeThingService } from "../someThing.service";
 @common.UseGuards(GqlDefaultAuthGuard, gqlACGuard.GqlACGuard)
 @graphql.Resolver(() => SomeThing)
@@ -57,7 +57,7 @@ export class SomeThingResolverBase {
   async someThings(
     @graphql.Args() args: SomeThingFindManyArgs
   ): Promise<SomeThing[]> {
-    return this.service.findMany(args);
+    return this.service.someThings(args);
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
@@ -70,7 +70,7 @@ export class SomeThingResolverBase {
   async someThing(
     @graphql.Args() args: SomeThingFindUniqueArgs
   ): Promise<SomeThing | null> {
-    const result = await this.service.findOne(args);
+    const result = await this.service.someThing(args);
     if (result === null) {
       return null;
     }
@@ -87,7 +87,7 @@ export class SomeThingResolverBase {
     @graphql.Args() args: DeleteSomeThingArgs
   ): Promise<SomeThing | null> {
     try {
-      return await this.service.delete(args);
+      return await this.service.deleteSomeThing(args);
     } catch (error) {
       if (isRecordNotFoundError(error)) {
         throw new GraphQLError(

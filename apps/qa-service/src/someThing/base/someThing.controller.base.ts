@@ -22,11 +22,10 @@ import { SomeThingService } from "../someThing.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
 import { SomeThingCreateInput } from "./SomeThingCreateInput";
-import { SomeThingWhereInput } from "./SomeThingWhereInput";
-import { SomeThingWhereUniqueInput } from "./SomeThingWhereUniqueInput";
-import { SomeThingFindManyArgs } from "./SomeThingFindManyArgs";
-import { SomeThingUpdateInput } from "./SomeThingUpdateInput";
 import { SomeThing } from "./SomeThing";
+import { SomeThingFindManyArgs } from "./SomeThingFindManyArgs";
+import { SomeThingWhereUniqueInput } from "./SomeThingWhereUniqueInput";
+import { SomeThingUpdateInput } from "./SomeThingUpdateInput";
 
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
@@ -46,8 +45,10 @@ export class SomeThingControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async create(@common.Body() data: SomeThingCreateInput): Promise<SomeThing> {
-    return await this.service.create({
+  async createSomeThing(
+    @common.Body() data: SomeThingCreateInput
+  ): Promise<SomeThing> {
+    return await this.service.createSomeThing({
       data: data,
       select: {
         createdAt: true,
@@ -69,9 +70,9 @@ export class SomeThingControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findMany(@common.Req() request: Request): Promise<SomeThing[]> {
+  async someThings(@common.Req() request: Request): Promise<SomeThing[]> {
     const args = plainToClass(SomeThingFindManyArgs, request.query);
-    return this.service.findMany({
+    return this.service.someThings({
       ...args,
       select: {
         createdAt: true,
@@ -93,10 +94,10 @@ export class SomeThingControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async findOne(
+  async someThing(
     @common.Param() params: SomeThingWhereUniqueInput
   ): Promise<SomeThing | null> {
-    const result = await this.service.findOne({
+    const result = await this.service.someThing({
       where: params,
       select: {
         createdAt: true,
@@ -124,12 +125,12 @@ export class SomeThingControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async update(
+  async updateSomeThing(
     @common.Param() params: SomeThingWhereUniqueInput,
     @common.Body() data: SomeThingUpdateInput
   ): Promise<SomeThing | null> {
     try {
-      return await this.service.update({
+      return await this.service.updateSomeThing({
         where: params,
         data: data,
         select: {
@@ -159,11 +160,11 @@ export class SomeThingControllerBase {
   @swagger.ApiForbiddenResponse({
     type: errors.ForbiddenException,
   })
-  async delete(
+  async deleteSomeThing(
     @common.Param() params: SomeThingWhereUniqueInput
   ): Promise<SomeThing | null> {
     try {
-      return await this.service.delete({
+      return await this.service.deleteSomeThing({
         where: params,
         select: {
           createdAt: true,
